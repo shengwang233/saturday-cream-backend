@@ -1,5 +1,6 @@
 package com.saturday.controller.admin;
 
+import com.saturday.dto.EmployeeDTO;
 import com.saturday.result.Result;
 import com.saturday.dto.EmployeeLoginDTO;
 import com.saturday.entity.Employee;
@@ -25,7 +26,7 @@ public class EmployeeController {
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
         Employee employee = employeeService.login(employeeLoginDTO);
-        //success it will generate jwt token
+        //if success it will generate jwt token
         Map<String,Object> claims = new HashMap<>();
         claims.put("empId", employee.getId());
         String token = JwtUtil.createJWT("saturday-cream-233-1234567890abcdef", 7200000, claims);
@@ -37,4 +38,16 @@ public class EmployeeController {
                 .build();
         return Result.success(employeeLoginVO);
     }
+
+    /**
+     * insert new employee
+     * @param employeeDTO
+     * @return
+     */
+    @PostMapping
+    public Result save(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.save(employeeDTO);
+        return Result.success();
+    }
+
 }

@@ -1,17 +1,22 @@
 package com.saturday.service.impl;
 
+import com.saturday.dto.EmployeeDTO;
 import com.saturday.dto.EmployeeLoginDTO;
 import com.saturday.entity.Employee;
 import com.saturday.exception.AccountLockedException;
 import com.saturday.exception.AccountNotFoundException;
 import com.saturday.exception.PasswordErrorException;
 import com.saturday.mapper.EmployeeMapper;
+import com.saturday.result.Result;
 import com.saturday.service.EmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.time.LocalDateTime;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -25,20 +30,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = employeeMapper.getByUsername(username);
         if (employee == null){
-            throw new AccountNotFoundException("user not existed");
+            throw new AccountNotFoundException("Account Not Found");
 
         }
         password = DigestUtils.md5DigestAsHex(password.getBytes());
 
         if (!password.equals(employee.getPassword())){
-            throw new PasswordErrorException("wrong password");
+            throw new PasswordErrorException("Invalid username or password");
         }
 
         if (employee.getStatus() == 0) {
             //locked
-            throw new AccountLockedException("user locked");
+            throw new AccountLockedException("Account Locked");
         }
 
         return employee;
     }
+
+    @Override
+    public void save(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        employee.setStatus(1); // 1 is active 0 is disabled
+        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes())); // default password is 123456
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setCreateUser(1L); //admin user
+        employee.setUpdateUser(1L); //admin user
+        // mapper layer
+        employeeMapper.insert(employee);
+    }
+
+
+
+
 }
