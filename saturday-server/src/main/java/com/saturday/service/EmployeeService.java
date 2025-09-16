@@ -5,6 +5,7 @@ import com.saturday.dto.EmployeeLoginDTO;
 import com.saturday.dto.EmployeePageQueryDTO;
 import com.saturday.entity.Employee;
 import com.saturday.result.PageResult;
+import com.saturday.result.Result;
 
 public interface EmployeeService {
     /**
@@ -24,4 +25,9 @@ public interface EmployeeService {
      * page query
      */
     PageResult page(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * start or stop employee
+     */
+    void startOrStop(Integer status,Long id);
 }

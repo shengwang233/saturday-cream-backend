@@ -9,6 +9,8 @@ import com.saturday.result.Result;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 @Mapper
 public interface EmployeeMapper {
 
@@ -19,4 +21,7 @@ public interface EmployeeMapper {
     void insert(Employee employee);
 
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+//    @Update("UPDATE employee SET status = #{Status} WHERE id = #{id}")
+    void startOrStopUpdate(Employee employee);
 }

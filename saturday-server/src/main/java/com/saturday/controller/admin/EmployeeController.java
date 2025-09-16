@@ -67,4 +67,14 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    /**
+     * enable / disable state of employee
+     */
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable("status") Integer status, Long id) {
+        employeeService.startOrStop(status, id);
+        return Result.success();
+    }
+
+
 }
