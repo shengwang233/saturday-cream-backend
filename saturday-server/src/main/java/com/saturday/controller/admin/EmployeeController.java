@@ -1,7 +1,9 @@
 package com.saturday.controller.admin;
 
 import com.saturday.dto.EmployeeDTO;
+import com.saturday.dto.EmployeePageQueryDTO;
 import com.saturday.properties.JwtProperties;
+import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.dto.EmployeeLoginDTO;
 import com.saturday.entity.Employee;
@@ -9,10 +11,7 @@ import com.saturday.service.EmployeeService;
 import com.saturday.utils.JwtUtil;
 import com.saturday.vo.EmployeeLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +56,15 @@ public class EmployeeController {
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
         employeeService.save(employeeDTO);
         return Result.success();
+    }
+
+    /**
+     * pagination
+     */
+    @GetMapping("/page")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+        PageResult pageResult = employeeService.page(employeePageQueryDTO);
+        return Result.success(pageResult);
     }
 
 }

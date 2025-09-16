@@ -1,13 +1,17 @@
 package com.saturday.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.saturday.context.BaseContext;
 import com.saturday.dto.EmployeeDTO;
 import com.saturday.dto.EmployeeLoginDTO;
+import com.saturday.dto.EmployeePageQueryDTO;
 import com.saturday.entity.Employee;
 import com.saturday.exception.AccountLockedException;
 import com.saturday.exception.AccountNotFoundException;
 import com.saturday.exception.PasswordErrorException;
 import com.saturday.mapper.EmployeeMapper;
+import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +22,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -61,5 +66,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateUser(BaseContext.getCurrentId()); //admin user
         // mapper layer
         employeeMapper.insert(employee);
+    }
+
+    @Override
+    public PageResult page(EmployeePageQueryDTO employeePageQueryDTO) {
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+        long total = page.getTotal();
+        List<Employee> records = page.getResult();
+        return new PageResult(total, records);
     }
 }
