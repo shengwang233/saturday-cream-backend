@@ -33,7 +33,7 @@ logging:
 
 saturday:
   jwt:
-    admin-secret-key: saturday
+    admin-secret-key: saturday-cream-233-1234567890abcdef
     admin-ttl: 7200000
     admin-token-name: token
 

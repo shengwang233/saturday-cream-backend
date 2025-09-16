@@ -1,6 +1,7 @@
 package com.saturday.controller.admin;
 
 import com.saturday.dto.EmployeeDTO;
+import com.saturday.properties.JwtProperties;
 import com.saturday.result.Result;
 import com.saturday.dto.EmployeeLoginDTO;
 import com.saturday.entity.Employee;
@@ -23,13 +24,16 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private JwtProperties jwtProperties;
+
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
         Employee employee = employeeService.login(employeeLoginDTO);
         //if success it will generate jwt token
         Map<String,Object> claims = new HashMap<>();
         claims.put("empId", employee.getId());
-        String token = JwtUtil.createJWT("saturday-cream-233-1234567890abcdef", 7200000, claims);
+        String token = JwtUtil.createJWT(jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl(), claims);
         EmployeeLoginVO employeeLoginVO = EmployeeLoginVO.builder()
                 .id(employee.getId())
                 .userName(employee.getUsername())
