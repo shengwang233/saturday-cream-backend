@@ -1,5 +1,6 @@
 package com.saturday.service.impl;
 
+import com.saturday.context.BaseContext;
 import com.saturday.dto.EmployeeDTO;
 import com.saturday.dto.EmployeeLoginDTO;
 import com.saturday.entity.Employee;
@@ -56,8 +57,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes())); // default password is 123456
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
-        employee.setCreateUser(1L); //admin user
-        employee.setUpdateUser(1L); //admin user
+        employee.setCreateUser(BaseContext.getCurrentId()); //admin user
+        employee.setUpdateUser(BaseContext.getCurrentId()); //admin user
         // mapper layer
         employeeMapper.insert(employee);
     }
