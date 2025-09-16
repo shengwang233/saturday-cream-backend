@@ -79,7 +79,14 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public Result<Employee> getById(@PathVariable("id") Long id) {
         Employee employee = employeeService.getById(id);
+        employee.setPassword("****"); // hide password
         return Result.success(employee);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.update(employeeDTO);
+        return Result.success();
     }
 
 

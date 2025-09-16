@@ -35,4 +35,9 @@ public interface EmployeeService {
      * get employee by id
      */
     Employee getById(Long id);
+
+    /**
+     * update employee
+     */
+    void update(EmployeeDTO employeeDTO);
 }

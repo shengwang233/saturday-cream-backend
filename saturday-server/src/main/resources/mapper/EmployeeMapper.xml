@@ -15,7 +15,7 @@
         order by create_time desc
     </select>
 
-    <update id="startOrStopUpdate" parameterType="Employee">
+    <update id="update" parameterType="Employee">
         update employee
         <set>
         <if test="name != null">
