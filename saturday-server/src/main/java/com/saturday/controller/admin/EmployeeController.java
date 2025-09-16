@@ -39,6 +39,11 @@ public class EmployeeController {
         return Result.success(employeeLoginVO);
     }
 
+    @PostMapping("/logout")
+    public Result logout() {
+        return Result.success();
+    }
+
     /**
      * insert new employee
      * @param employeeDTO
