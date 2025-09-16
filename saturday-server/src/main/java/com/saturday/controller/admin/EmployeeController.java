@@ -76,5 +76,11 @@ public class EmployeeController {
         return Result.success();
     }
 
+    @GetMapping("/{id}")
+    public Result<Employee> getById(@PathVariable("id") Long id) {
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
 
 }

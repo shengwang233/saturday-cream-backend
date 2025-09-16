@@ -30,4 +30,9 @@ public interface EmployeeService {
      * start or stop employee
      */
     void startOrStop(Integer status,Long id);
+
+    /**
+     * get employee by id
+     */
+    Employee getById(Long id);
 }

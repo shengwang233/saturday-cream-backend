@@ -83,5 +83,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.startOrStopUpdate(employee);
     }
 
+    @Override
+    public Employee getById(Long id) {
+        return employeeMapper.getById(id);
+
+    }
+
 
 }
