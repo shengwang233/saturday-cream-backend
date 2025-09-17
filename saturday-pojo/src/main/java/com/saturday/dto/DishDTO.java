@@ -1,6 +1,6 @@
 package com.saturday.dto;
 
-import com.sky.entity.DishFlavor;
+import com.saturday.entity.DishFlavor;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * flavour
+ * 菜品口味
  */
 @Data
 @Builder
