@@ -33,7 +33,7 @@ public class AutoFillAspect {
      */
     @Before("autoFillPointCut()")
     public void autoFill(JoinPoint joinPoint) {
-        // 1. Get operation type from @AutoFill annotation
+        // 1. Get operation type from @AutoFill annotation(REFLECTION)
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);
         OperationType operationType = autoFill.value();
