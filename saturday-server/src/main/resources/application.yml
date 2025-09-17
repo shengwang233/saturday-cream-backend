@@ -37,3 +37,9 @@ saturday:
     admin-ttl: 7200000
     admin-token-name: token
 
+aws:
+  bucket: ${saturday.aws.s3.bucket}
+  region: ${saturday.aws.s3.region}
+
+  access-key: ${saturday.aws.credentials.access-key}
+  secret-key: ${saturday.aws.credentials.secret-key}
