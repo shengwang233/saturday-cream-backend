@@ -1,12 +1,17 @@
 package com.saturday.mapper;
 
+import com.github.pagehelper.Page;
 import com.saturday.annotaion.AutoFill;
+import com.saturday.dto.DishDTO;
+import com.saturday.dto.DishPageQueryDTO;
 import com.saturday.entity.Dish;
 import com.saturday.entity.DishFlavor;
 import com.saturday.enumeration.OperationType;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.saturday.vo.DishVO;
+import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Mapper
 public interface DishMapper {
@@ -24,5 +29,14 @@ public interface DishMapper {
 
     @AutoFill(value = OperationType.INSERT)
     void insertBatch(DishFlavor dishFlavor);
+
+    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+
+    List<Dish> getByIds(@Param("ids") List<Long> ids);
+
+    @Delete("DELETE FROM dish WHERE id = #{id}")
+    void deleteById(Long id);
+
 
 }
