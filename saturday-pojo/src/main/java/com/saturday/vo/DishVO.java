@@ -1,5 +1,6 @@
 package com.saturday.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.saturday.entity.DishFlavor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,7 @@ public class DishVO implements Serializable {
     private String description;
 
     private Integer status;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     private String categoryName;

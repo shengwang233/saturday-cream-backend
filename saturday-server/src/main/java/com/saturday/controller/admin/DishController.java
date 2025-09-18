@@ -5,6 +5,7 @@ import com.saturday.dto.DishPageQueryDTO;
 import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.service.DishService;
+import com.saturday.vo.DishVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,26 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+    /**
+     * get dish by id
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<DishVO> getById(@PathVariable Long id){
+        DishVO dishVO = dishService.getByIdWithFlavors(id);
+        return Result.success(dishVO);
+    }
 
+    /**
+     * update dish
+     * @param dishDTO
+     * @return
+     */
+    @PutMapping
+    public Result update(@RequestBody DishDTO dishDTO){
+        dishService.updateWithFlavors(dishDTO);
+        return Result.success();
+    }
 
 }
