@@ -5,6 +5,7 @@ import com.saturday.annotaion.AutoFill;
 import com.saturday.dto.DishPageQueryDTO;
 import com.saturday.entity.Dish;
 import com.saturday.entity.DishFlavor;
+import com.saturday.entity.SetmealDish;
 import com.saturday.enumeration.OperationType;
 import com.saturday.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
@@ -18,6 +19,8 @@ public interface SetMealDishMapper {
 
 
     int countByDishIds(List<Long> id);
+
+    void insertBatch(List<SetmealDish> setmealDishes);
 
 
 }

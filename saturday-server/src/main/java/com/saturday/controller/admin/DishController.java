@@ -2,6 +2,7 @@ package com.saturday.controller.admin;
 
 import com.saturday.dto.DishDTO;
 import com.saturday.dto.DishPageQueryDTO;
+import com.saturday.entity.Dish;
 import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.service.DishService;
@@ -54,6 +55,14 @@ public class DishController {
     public Result<DishVO> getById(@PathVariable Long id){
         DishVO dishVO = dishService.getByIdWithFlavors(id);
         return Result.success(dishVO);
+    }
+    /**
+     * get dish by category
+     */
+    @GetMapping("/list")
+    public Result<List<Dish>> list(@RequestParam Long categoryId){
+        List<Dish> list = dishService.list(categoryId);
+        return Result.success(list);
     }
 
     /**

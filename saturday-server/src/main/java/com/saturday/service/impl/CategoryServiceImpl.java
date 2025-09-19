@@ -10,7 +10,7 @@ import com.saturday.entity.Category;
 import com.saturday.exception.DeletionNotAllowedException;
 import com.saturday.mapper.CategoryMapper;
 import com.saturday.mapper.DishMapper;
-import com.saturday.mapper.SetmealMapper;
+import com.saturday.mapper.SetMealMapper;
 import com.saturday.result.PageResult;
 import com.saturday.service.CategoryService;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private DishMapper dishMapper;
     @Autowired
-    private SetmealMapper setmealMapper;
+    private SetMealMapper setmealMapper;
 
     /**
      * Add a new category

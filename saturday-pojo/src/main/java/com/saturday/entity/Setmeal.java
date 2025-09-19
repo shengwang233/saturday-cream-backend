@@ -7,27 +7,39 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
- * 套餐菜品关系
+ * 套餐
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SetmealDish implements Serializable {
+public class Setmeal implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    private Long setmealId;
-
-    private Long dishId;
 
     private String name;
 
+    private Long categoryId;
+
     private BigDecimal price;
 
-    private Integer copies;
+    private String image;
+
+    private String description;
+
+    private Integer status;
+
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
+
+    private Long createUser;
+
+    private Long updateUser;
 }

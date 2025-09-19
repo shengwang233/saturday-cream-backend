@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.saturday.mapper.SetMealDishMapper">
+    <insert id="insertBatch">
+        insert into setmeal_dish(setmeal_id, dish_id, name, price, dish_flavor, type)
+        values
+        <foreach collection="setmealDishes" item="item" separator=",">
+            (#{item.setmealId}, #{item.dishId}, #{item.name}, #{item.price}, #{item.dishFlavor}, #{item.type})
+        </foreach>
+    </insert>
 
 
     <select id="countByDishIds" resultType="java.lang.Integer">
