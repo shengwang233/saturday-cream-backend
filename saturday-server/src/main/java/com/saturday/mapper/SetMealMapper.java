@@ -1,6 +1,8 @@
 package com.saturday.mapper;
 
+import com.github.pagehelper.Page;
 import com.saturday.annotaion.AutoFill;
+import com.saturday.dto.SetmealPageQueryDTO;
 import com.saturday.entity.Setmeal;
 import com.saturday.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
@@ -20,5 +22,7 @@ public interface SetMealMapper {
 
     @AutoFill(OperationType.INSERT)
     void insert(Setmeal setmeal);
+
+    Page<Setmeal> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 
 }

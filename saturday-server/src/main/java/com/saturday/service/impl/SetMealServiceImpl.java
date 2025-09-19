@@ -1,12 +1,17 @@
 package com.saturday.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.saturday.dto.SetmealDTO;
+import com.saturday.dto.SetmealPageQueryDTO;
 import com.saturday.entity.Dish;
 import com.saturday.entity.Setmeal;
 import com.saturday.entity.SetmealDish;
 import com.saturday.mapper.SetMealDishMapper;
 import com.saturday.mapper.SetMealMapper;
+import com.saturday.result.PageResult;
 import com.saturday.service.SetMealService;
+import com.saturday.vo.SetmealVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +43,18 @@ public class SetMealServiceImpl implements SetMealService {
 
         setMealDishMapper.insertBatch(setmealDishes);
 
+    }
+
+
+
+    @Override
+    public PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO) {
+        PageHelper.startPage(setmealPageQueryDTO.getPage(), setmealPageQueryDTO.getPageSize());
+        Page<Setmeal> pages = setMealMapper.pageQuery(setmealPageQueryDTO);
+
+        long total = pages.getTotal();
+        List<Setmeal> result = pages.getResult();
+
+        return new PageResult(total, result);
     }
 }
