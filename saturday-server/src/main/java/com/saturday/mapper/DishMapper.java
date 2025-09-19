@@ -35,13 +35,19 @@ public interface DishMapper {
 
     List<Dish> getByIds(@Param("ids") List<Long> ids);
 
+
     @Delete("DELETE FROM dish WHERE id = #{id}")
     void deleteById(Long id);
 
     @Select("select * from dish where id = #{id}")
     Dish getById(Long id);
 
+    @Select("select * from dish where category_id = #{categoryId}")
+    List<Dish> getByCategoryId(Long categoryId);
+
+
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
 
 }
