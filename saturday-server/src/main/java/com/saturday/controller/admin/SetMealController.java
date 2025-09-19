@@ -3,9 +3,11 @@ package com.saturday.controller.admin;
 import com.github.pagehelper.PageHelper;
 import com.saturday.dto.SetmealDTO;
 import com.saturday.dto.SetmealPageQueryDTO;
+import com.saturday.entity.Setmeal;
 import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.service.SetMealService;
+import com.saturday.vo.SetmealVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +42,12 @@ public class SetMealController {
     public Result startOrStop(@PathVariable Integer status, Long id){
         setMealService.startOrStop(status, id);
         return Result.success();
-
     }
 
+    @GetMapping("/{id}")
+    public Result<SetmealVO> getById(@PathVariable Long id){
+        SetmealVO setmealVO = setMealService.getById(id);
+        return Result.success(setmealVO);
+    }
 
 }
