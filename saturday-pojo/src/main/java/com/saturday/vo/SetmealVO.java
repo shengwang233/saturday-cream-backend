@@ -1,5 +1,6 @@
 package com.saturday.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.saturday.entity.SetmealDish;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,12 +38,10 @@ public class SetmealVO implements Serializable {
 
 
     private String image;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
-
     private String categoryName;
-
 
     private List<SetmealDish> setmealDishes = new ArrayList<>();
 }

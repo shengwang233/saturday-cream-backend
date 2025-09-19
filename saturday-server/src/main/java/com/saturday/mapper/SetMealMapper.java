@@ -5,6 +5,7 @@ import com.saturday.annotaion.AutoFill;
 import com.saturday.dto.SetmealPageQueryDTO;
 import com.saturday.entity.Setmeal;
 import com.saturday.enumeration.OperationType;
+import com.saturday.vo.SetmealVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -26,7 +27,7 @@ public interface SetMealMapper {
     @AutoFill(OperationType.INSERT)
     void insert(Setmeal setmeal);
 
-    Page<Setmeal> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 
 
     @AutoFill(OperationType.UPDATE)

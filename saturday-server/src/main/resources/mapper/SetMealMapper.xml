@@ -24,20 +24,20 @@
         where id = #{id}
     </update>
 
-    <select id="pageQuery" resultType="com.saturday.entity.Setmeal">
-        select * from setmeal
+    <select id="pageQuery" resultType="com.saturday.vo.SetmealVO">
+        select s.*, c.name as categoryName from setmeal s LEFT JOIN category c ON s.category_id = c.id
         <where>
             <if test="name != null and name != ''">
-                and name = #{name}
+                and c.name = #{name}
             </if>
             <if test="categoryId != null and categoryId != ''">
-                and category_id = #{categoryId}
+                and c.category_id = #{categoryId}
             </if>
             <if test="status != null and status != ''">
-                and status = #{status}
+                and c.status = #{status}
             </if>
         </where>
-        order by create_time desc
+        order by c.create_time desc
     </select>
 
 </mapper>
