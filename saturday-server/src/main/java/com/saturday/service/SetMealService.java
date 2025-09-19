@@ -12,4 +12,7 @@ public interface SetMealService {
     void saveWithDish(SetmealDTO setmealDTO);
 
     PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    void startOrStop(Integer status, Long id);
+
 }

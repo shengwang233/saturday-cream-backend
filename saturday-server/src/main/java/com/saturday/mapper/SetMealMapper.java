@@ -20,9 +20,16 @@ public interface SetMealMapper {
     @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
 
+    @Select("select * from setmeal where id = #{id}")
+    Setmeal getById(Long id);
+
     @AutoFill(OperationType.INSERT)
     void insert(Setmeal setmeal);
 
     Page<Setmeal> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+
+    @AutoFill(OperationType.UPDATE)
+    void update(Setmeal setmeal);
 
 }

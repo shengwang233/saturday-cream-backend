@@ -33,4 +33,15 @@ public class SetMealController {
 
         return Result.success(pageResult);
     }
+    /**
+     * set meal enable, disable
+     */
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status, Long id){
+        setMealService.startOrStop(status, id);
+        return Result.success();
+
+    }
+
+
 }

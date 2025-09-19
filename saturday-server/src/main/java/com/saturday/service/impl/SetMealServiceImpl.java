@@ -57,4 +57,12 @@ public class SetMealServiceImpl implements SetMealService {
 
         return new PageResult(total, result);
     }
+
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Setmeal setmeal = setMealMapper.getById(id);
+        setmeal.setStatus(status);
+        setMealMapper.update(setmeal);
+
+    }
 }
