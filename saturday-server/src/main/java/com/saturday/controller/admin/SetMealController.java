@@ -1,15 +1,12 @@
 package com.saturday.controller.admin;
 
-import com.github.pagehelper.PageHelper;
 import com.saturday.dto.SetmealDTO;
 import com.saturday.dto.SetmealPageQueryDTO;
-import com.saturday.entity.Setmeal;
 import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.service.SetMealService;
 import com.saturday.vo.SetmealVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -50,4 +47,12 @@ public class SetMealController {
         return Result.success(setmealVO);
     }
 
+    /**
+     *  update set meal
+     */
+    @PutMapping
+    public Result update(@RequestBody SetmealDTO setmealDTO){
+        setMealService.updateWithDishes(setmealDTO);
+        return Result.success();
+    }
 }
