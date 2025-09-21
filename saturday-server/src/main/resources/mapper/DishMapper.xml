@@ -43,8 +43,8 @@
             <if test="name != null">
                 and name like concat('%',#{name},'%')
             </if>
-            <if test="category_id != null" >
-                and category_id = #{category_id}
+            <if test="categoryId != null" >
+                and category_id = #{categoryId}
             </if>
             <if test="status != null">
                 and status = #{status}
@@ -52,6 +52,7 @@
         </where>
         order by update_time desc
     </select>
+
 
     <update id="update">
         update dish
