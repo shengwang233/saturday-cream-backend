@@ -17,4 +17,11 @@
             #{id}
         </foreach>
     </select>
+
+    <delete id="deleteBySetmealIds">
+        delete from setmeal_dish where setmeal_id in
+        <foreach item="categoryId" collection="categoryIds" separator="," open="(" close=")">
+            #{categoryId}
+        </foreach>
+    </delete>
 </mapper>

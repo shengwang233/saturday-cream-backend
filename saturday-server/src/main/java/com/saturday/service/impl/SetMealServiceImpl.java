@@ -28,6 +28,8 @@ public class SetMealServiceImpl implements SetMealService {
     @Autowired
     private SetMealMapper setMealMapper;
 
+
+
     @Override
     @Transactional
     public void saveWithDish(SetmealDTO setmealDTO) {
@@ -39,6 +41,7 @@ public class SetMealServiceImpl implements SetMealService {
         //2.get the set meal id of the setmeal
         Long categoryId = setmeal.getId();
 
+        //3.save the relationship between setmeal and dish in table setmeal dish
         List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
         if (setmealDishes != null && setmealDishes.size() > 0){
             setmealDishes.forEach(setmealDish-> {
@@ -109,6 +112,7 @@ public class SetMealServiceImpl implements SetMealService {
                 throw new DeletionNotAllowedException("Set Meal is currently active, cannot be deleted");
             }
         }
+        setMealDishMapper.deleteBySetmealIds(ids);
         setMealMapper.deleteBatch(ids);
     }
 }
