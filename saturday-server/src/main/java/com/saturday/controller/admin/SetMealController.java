@@ -6,8 +6,11 @@ import com.saturday.result.PageResult;
 import com.saturday.result.Result;
 import com.saturday.service.SetMealService;
 import com.saturday.vo.SetmealVO;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/setmeal")
@@ -53,6 +56,12 @@ public class SetMealController {
     @PutMapping
     public Result update(@RequestBody SetmealDTO setmealDTO){
         setMealService.updateWithDishes(setmealDTO);
+        return Result.success();
+    }
+
+    @DeleteMapping
+    public Result delete(@RequestParam List<Long> ids){
+        setMealService.deleteBatch(ids);
         return Result.success();
     }
 }

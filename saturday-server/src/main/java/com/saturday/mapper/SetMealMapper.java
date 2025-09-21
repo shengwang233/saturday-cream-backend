@@ -7,9 +7,12 @@ import com.saturday.dto.SetmealPageQueryDTO;
 import com.saturday.entity.Setmeal;
 import com.saturday.enumeration.OperationType;
 import com.saturday.vo.SetmealVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface SetMealMapper {
@@ -25,6 +28,9 @@ public interface SetMealMapper {
     @Select("select * from setmeal where id = #{id}")
     Setmeal getById(Long id);
 
+
+    List<Setmeal> getByIds(List<Long> ids);
+
     @AutoFill(OperationType.INSERT)
     void insert(Setmeal setmeal);
 
@@ -33,5 +39,8 @@ public interface SetMealMapper {
 
     @AutoFill(OperationType.UPDATE)
     void update(Setmeal setmeal);
+
+
+    void deleteBatch(List<Long> ids);
 
 }

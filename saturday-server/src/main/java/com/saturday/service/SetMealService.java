@@ -6,6 +6,8 @@ import com.saturday.entity.Setmeal;
 import com.saturday.result.PageResult;
 import com.saturday.vo.SetmealVO;
 
+import java.util.List;
+
 public interface SetMealService {
 
     void saveWithDish(SetmealDTO setmealDTO);
@@ -17,5 +19,7 @@ public interface SetMealService {
     SetmealVO getById(Long id);
 
     void updateWithDishes(SetmealDTO setmealDTO);
+
+    void deleteBatch(List<Long> ids);
 
 }

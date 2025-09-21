@@ -7,6 +7,7 @@ import com.saturday.dto.SetmealPageQueryDTO;
 import com.saturday.entity.Dish;
 import com.saturday.entity.Setmeal;
 import com.saturday.entity.SetmealDish;
+import com.saturday.exception.DeletionNotAllowedException;
 import com.saturday.mapper.SetMealDishMapper;
 import com.saturday.mapper.SetMealMapper;
 import com.saturday.result.PageResult;
@@ -94,5 +95,18 @@ public class SetMealServiceImpl implements SetMealService {
             setMealDishMapper.insertBatch(setmealDishes);
 
         }
+    }
+
+    @Override
+    @Transactional
+    public void deleteBatch(List<Long> ids) {
+        List<Setmeal> setmeals = setMealMapper.getByIds(ids);
+        //if set meal is active, cannot be deleted
+        for(Setmeal setmeal : setmeals){
+            if (setmeal.getStatus() == 1){
+                throw new DeletionNotAllowedException("Set Meal is currently active, cannot be deleted");
+            }
+        }
+        setMealMapper.deleteBatch(ids);
     }
 }
